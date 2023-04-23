@@ -1,7 +1,7 @@
 # Code adapted from one of the solutions provided at:
 # https://www.theodinproject.com/lessons/ruby-tic-tac-toe
 # See: 
-# https://github.com/shoebham/Ruby_Projects_the_odin_project/blob/main/Project_Tic_Tac_Toe/tic_tac_toe.rb
+# https://rosettacode.org/wiki/Tic-tac-toe#Ruby
 
 module TicTacToe
   LINES =
