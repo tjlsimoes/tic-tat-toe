@@ -23,13 +23,14 @@ module TicTacToe
 
     def play
       loop do
+        introductory_message
         place_player_marker(current_player)
 
         if player_has_won?(current_player)
           puts "#{current_player} wins!"
           print_board
           return
-        elsif board_full? 
+        elsif board_full?
           puts "It's a draw."
           print_board
           return
@@ -39,7 +40,7 @@ module TicTacToe
       end
     end
 
-    def introductiory_message(current_player)
+    def introductory_message
       puts "#{current_player} goes first."
     end
 

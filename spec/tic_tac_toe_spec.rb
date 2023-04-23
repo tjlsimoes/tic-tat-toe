@@ -117,9 +117,6 @@ describe Game do
         end
       end
     end
-
-
-
   end
 
   describe "#place_player_marker" do
@@ -176,5 +173,212 @@ describe Game do
     end
   end
 
-end
+  describe "#player_has_won?" do
 
+    context "Player 1 win" do
+
+      context "first top horizontal X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, "X", "X", "X", "0", nil, nil, nil, nil, nil]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "middle horizontal X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, nil, nil, nil, "X", "X", "X", "0", nil, nil]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "bottom horizontal X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, nil, nil, "O", "O", nil, nil, "X", "X", "X"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "left vertical X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, "X", nil, nil, "X", nil, nil, "X", "O", "O"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "middle vertical X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, nil, "X", nil, nil, "X", nil, "O", "X", "O"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "right vertical X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, nil, nil, "X", nil, nil, "X", "O", "O", "X"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "up left to right bottom diagonal X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, "X", nil, "O", nil, "X", "O", "O", nil, "X"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+
+      context "up right to left bottom diagonal X win" do
+        it "returns true" do
+          player1 = game.current_player
+          board = [nil, "O", nil, "X", nil, "X", "O", "X", nil, "O"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player1)).to eq true
+        end
+      end
+    end
+
+    context "Player 2 win" do
+
+      before do
+        game.instance_variable_set(:@current_player_id, 1)
+      end
+
+      context "first top horizontal O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, "O", "O", "O", "0", nil, nil, nil, nil, nil]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "middle horizontal O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, nil, nil, nil, "O", "O", "O", "0", nil, nil]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "bottom horizontal O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, nil, nil, "X", "X", nil, nil, "O", "O", "O"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "left vertical O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, "O", nil, nil, "O", nil, nil, "O", "X", "X"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "middle vertical O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, nil, "O", nil, nil, "O", nil, "X", "O", "X"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "right vertical O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, nil, nil, "O", nil, nil, "O", "X", "X", "O"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "up left to right bottom diagonal O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, "O", nil, "X", nil, "O", "X", "X", nil, "O"]
+          game.instance_variable_set(:@board, board)
+
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+
+      context "up right to left bottom diagonal O win" do
+        it "returns true" do
+          player2 = game.current_player
+          board = [nil, "X", nil, "O", nil, "O", "X", "O", nil, "X"]
+          game.instance_variable_set(:@board, board)
+  
+          expect(game.player_has_won?(player2)).to eq true
+        end
+      end
+    end
+  end
+
+  context "#switch_players!" do
+    context "switching from player 1 to player 2" do
+      it "changes current_id_player from 0 to 1" do
+        expect { game.switch_players! }.to change { 
+          game.instance_variable_get(:@current_player_id)}.from(0).to(1)
+      end
+    end
+
+    context "switching from player 1 to player 2" do
+      it "changes current_id_player from 0 to 1" do
+        game.instance_variable_set(:@current_player_id, 1)
+
+        expect { game.switch_players! }.to change { 
+          game.instance_variable_get(:@current_player_id)}.from(1).to(0)
+      end
+    end
+  end
+
+  context "#board_full?" do
+    context "when full" do
+      it "returns true" do
+        full_board = [nil, "X", "O", "X", "O", "O", "X", "O", "X", "O"]
+        game.instance_variable_set(:@board, full_board)
+        expect(game).to be_board_full
+      end
+    end
+    
+    context "when not full" do
+      it "returns false" do
+        board = [nil, "X", "O", "X", "O", "O", nil, nil, "X", "O"]
+        game.instance_variable_set(:@board, board)
+        expect(game).not_to be_board_full
+      end
+    end
+  end
+end
