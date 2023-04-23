@@ -1,6 +1,6 @@
 # Code adapted from one of the solutions provided at:
 # https://www.theodinproject.com/lessons/ruby-tic-tac-toe
-# More than likely: 
+# See: 
 # https://github.com/shoebham/Ruby_Projects_the_odin_project/blob/main/Project_Tic_Tac_Toe/tic_tac_toe.rb
 
 module TicTacToe
@@ -18,8 +18,6 @@ module TicTacToe
       @players = 
           [player_1_class.new(self, "X"), 
           player_2_class.new(self, "O")] 
-
-      puts "#{current_player} goes first."
     end
     attr_reader :board, :current_player_id
 
@@ -39,6 +37,10 @@ module TicTacToe
 
         switch_players!
       end
+    end
+
+    def introductiory_message(current_player)
+      puts "#{current_player} goes first."
     end
 
     def free_positions
@@ -121,4 +123,4 @@ module TicTacToe
 end
 
 include TicTacToe
-Game.new(HumanPlayer, HumanPlayer).play
+# Game.new(HumanPlayer, HumanPlayer).play
